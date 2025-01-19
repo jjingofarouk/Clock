@@ -19,7 +19,7 @@
             min-height: 100vh;
             background: #002432
             padding: 2rem;
-            color: var(--text-dark);
+            color: #ffffff
         }
 
         .container {
@@ -48,8 +48,9 @@
         }
 
         .stats-bar {
-            background: white;
+            background: #002432;
             padding: 1rem;
+        color: white
             border-radius: 10px;
             margin-bottom: 2rem;
             display: flex;
