@@ -1,61 +1,81 @@
 
         :root {
-            --primary-color: #6c5ce7;
-            --secondary-color: #a8a4ff;
-            --success-color: #00b894;
-            --background-light: #f5f7fa;
-            --text-dark: #2d3436;
-            --text-light: #636e72;
+            --primary-color: #5E44FF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --background-primary: #FFFFFF;
+            --background-secondary: #F5F5F7;
+            --card-background: #FFFFFF;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #7C66FF;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1A6;
+            --background-primary: #1A1A1A;
+            --background-secondary: #2C2C2E;
+            --card-background: #2C2C2E;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
-            min-height: 100vh;
-            background: #002432
-            padding: 2rem;
-            color: #ffffff
+            background: var(--background-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            transition: var(--transition);
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
+            padding: 2rem;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 2rem;
-            position: relative;
+            margin-bottom: 3rem;
         }
 
         .header h1 {
             font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color), #FF44E3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            position: relative;
         }
 
         .header p {
-            color: var(--text-light);
+            color: var(--text-secondary);
             font-size: 1.1rem;
         }
 
+        .mode-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--background-secondary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
         .stats-bar {
-            background: #002432;
-            padding: 1rem;
-        color: white
-            border-radius: 10px;
-            margin-bottom: 2rem;
             display: flex;
-            justify-content: space-around;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
         }
 
         .stat-item {
@@ -63,153 +83,78 @@
         }
 
         .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 700;
             color: var(--primary-color);
         }
 
         .stat-label {
+            color: var(--text-secondary);
             font-size: 0.9rem;
-            color: var(--text-light);
         }
 
         .kindness-card {
-            background: white;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kindness-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        }
-
-        .kindness-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.2);
+            transition: var(--transition);
         }
 
         .act-text {
-            font-size: 1.5rem;
-            color: var(--text-dark);
+            font-size: 1.25rem;
             margin-bottom: 1.5rem;
-            line-height: 1.4;
-            position: relative;
-            padding: 1rem;
-        }
-
-        .act-text::before {
-            content: '"';
-            font-size: 4rem;
-            color: rgba(108, 92, 231, 0.1);
-            position: absolute;
-            top: -1rem;
-            left: 0;
+            text-align: center;
         }
 
         .act-details {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
         .detail-tag {
+            background: var(--background-secondary);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            background: rgba(108, 92, 231, 0.1);
-            color: var(--primary-color);
-        }
-
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .filter-button {
-            padding: 0.5rem 1rem;
-            border-radius: 15px;
-            border: none;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text-light);
-        }
-
-        .filter-button.active {
-            background: var(--primary-color);
-            color: white;
+            color: var(--text-secondary);
         }
 
         .button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            width: 100%;
+            background: var(--primary-color);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
+            padding: 1rem;
+            border-radius: var(--border-radius);
             font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .button:hover::after {
-            opacity: 1;
-        }
-
-        .button span {
-            position: relative;
-            z-index: 1;
+            transition: var(--transition);
         }
 
         .button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+            transform: translateY(-2px);
+            filter: brightness(1.1);
         }
 
         .social-share {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         .share-button {
-            background: white;
-            color: var(--text-dark);
-            border: 2px solid var(--primary-color);
+            background: var(--background-secondary);
+            border: none;
             padding: 0.5rem 1rem;
-            border-radius: 15px;
+            border-radius: 20px;
+            color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -221,106 +166,66 @@
         }
 
         .completion-tracker {
-            background: white;
-            padding: 1rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
             text-align: center;
         }
 
         .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #eee;
-            border-radius: 5px;
+            height: 8px;
+            background: var(--background-secondary);
+            border-radius: 4px;
             margin: 1rem 0;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
             background: var(--primary-color);
-            position: absolute;
-            animation: confetti 3s ease-in-out infinite;
+            width: 0%;
+            transition: var(--transition);
         }
 
-        @keyframes confetti {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
+        .donation-section {
+            text-align: center;
+            padding: 3rem 0;
+            background: var(--background-secondary);
+            margin-top: 3rem;
+        }
+
+        .donation-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .donation-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .donate-button {
+            max-width: 200px;
+            margin: 0 auto;
         }
 
         @media (max-width: 600px) {
-            body {
+            .container {
                 padding: 1rem;
             }
 
             .header h1 {
                 font-size: 2rem;
             }
-            
-            .act-text {
-                font-size: 1.2rem;
-            }
-            
-            .button {
-                padding: 0.8rem 1.6rem;
-            }
-
-            .act-details {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
 
             .stats-bar {
+                gap: 1.5rem;
+            }
+
+            .social-share {
                 flex-wrap: wrap;
             }
-
-            .stat-item {
-                width: 50%;
-                margin-bottom: 1rem;
-            }
         }
-    .donation-section {
-    text-align: center;
-    margin: 3rem auto;
-    padding: 2rem;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.donation-section h2 {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.donation-section p {
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-}
-
-.donate-button {
-    padding: 1rem 2rem;
-    background-color: var(--secondary-color);
-    color: #fff;
-    font-size: 1rem;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.donate-button:hover {
-    background-color: var(--primary-color);
-}
+    
