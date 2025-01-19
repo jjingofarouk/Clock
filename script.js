@@ -264,6 +264,55 @@ function donate() {
     window.open('https://www.buymeacoffee.com/jjingofarouk', '_blank');
 }
 
-document.getElementById('modeToggle').addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
+// Theme handling
+const themeToggleBtn = document.getElementById('modeToggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+const currentTheme = localStorage.getItem('theme');
+
+// Theme toggle functionality
+function toggleTheme() {
+    if (document.body.classList.contains('dark-theme')) {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    } else {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    }
+}
+
+// Initialize theme
+function initializeTheme() {
+    // If user has previously selected a theme
+    if (currentTheme) {
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        } else {
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+        }
+    } 
+    // If user hasn't selected a theme, use system preference
+    else if (prefersDarkScheme.matches) {
+        document.body.classList.add('dark-theme');
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    }
+}
+
+// Event listeners
+themeToggleBtn.addEventListener('click', toggleTheme);
+prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+            document.body.classList.add('dark-theme');
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        } else {
+            document.body.classList.remove('dark-theme');
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+        }
+    }
 });
+
+// Initialize theme when page loads
+document.addEventListener('DOMContentLoaded', initializeTheme);
