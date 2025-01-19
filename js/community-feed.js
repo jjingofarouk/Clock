@@ -4,7 +4,6 @@ class CommunityFeed {
         this.loading = false;
         this.initializeListeners();
     }
-
     async initializeListeners() {
         // Infinite scroll
         window.addEventListener('scroll', () => {
@@ -13,23 +12,18 @@ class CommunityFeed {
             }
         });
     }
-
     async loadMorePosts() {
         if (this.loading) return;
         this.loading = true;
-
         try {
             let query = collection(db, 'posts')
                 .orderBy('timestamp', 'desc')
                 .limit(10);
-
             if (this.lastDoc) {
                 query = query.startAfter(this.lastDoc);
             }
-
             const snapshot = await getDocs(query);
             this.lastDoc = snapshot.docs[snapshot.docs.length - 1];
-
             snapshot.forEach(doc => {
                 this.renderPost(doc.data());
             });
@@ -39,7 +33,6 @@ class CommunityFeed {
             this.loading = false;
         }
     }
-
     renderPost(post) {
         const template = `
             <div class="community-post">
@@ -61,10 +54,8 @@ class CommunityFeed {
                 </div>
             </div>
         `;
-
         document.querySelector('.community-feed').insertAdjacentHTML('beforeend', template);
     }
-
     formatTimestamp(timestamp) {
         // Format timestamp to relative time
         const date = timestamp.toDate();
@@ -75,3 +66,4 @@ class CommunityFeed {
         // Implementation details...
     }
 }
+ this too. i need something very modern and noce
