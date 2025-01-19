@@ -1,0 +1,18 @@
+{
+    "acts": [
+        {
+            "id": 1,
+            "act": "Buy coffee for the person behind you in line",
+            "category": "Giving",
+            "difficulty": "easy"
+        },
+        {
+            "id": 2,
+            "act": "Leave a kind note for someone to find",
+            "category": "Thoughtful",
+            "difficulty": "easy"
+        }
+        // ... Add more acts here
+        // This file can be expanded to include hundreds or thousands of acts
+    ]
+}
