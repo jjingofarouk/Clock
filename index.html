@@ -1,1 +1,287 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Acts of Kindness Generator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #2d3436;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            color: #636e72;
+            font-size: 1.1rem;
+        }
+
+        .kindness-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .kindness-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .act-text {
+            font-size: 1.5rem;
+            color: #2d3436;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .button {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: #5b4bc4;
+            transform: scale(1.05);
+        }
+
+        .submit-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-section h2 {
+            color: #2d3436;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .share-button {
+            background: #f1f2f6;
+            color: #2d3436;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .share-button:hover {
+            background: #dfe4ea;
+        }
+
+        .success-message {
+            display: none;
+            background: #00b894;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .act-text {
+                font-size: 1.2rem;
+            }
+            
+            .button {
+                padding: 0.8rem 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Random Acts of Kindness Generator</h1>
+            <p>Make someone's day better with a simple act of kindness!</p>
+        </div>
+
+        <div class="kindness-card">
+            <p class="act-text" id="kindnessAct">Click the button below to get your random act of kindness for today!</p>
+            <button class="button" onclick="generateAct()">
+                <i class="fas fa-heart"></i> Generate Act of Kindness
+            </button>
+            <div class="social-share">
+                <button class="share-button" onclick="shareAct('twitter')">
+                    <i class="fab fa-twitter"></i> Share
+                </button>
+                <button class="share-button" onclick="copyAct()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+        </div>
+
+        <div class="submit-section">
+            <h2>Submit Your Own Act of Kindness</h2>
+            <div class="input-group">
+                <textarea id="newAct" placeholder="Enter your act of kindness idea here..."></textarea>
+            </div>
+            <button class="button" onclick="submitAct()">
+                <i class="fas fa-paper-plane"></i> Submit
+            </button>
+            <div class="success-message" id="successMessage">
+                Thank you! Your act of kindness has been added to the generator.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initial acts of kindness
+        let acts = [
+            "Buy coffee for the person behind you in line",
+            "Leave a kind note for someone to find",
+            "Help someone carry their groceries",
+            "Send a thank you message to someone who made a difference in your life",
+            "Pick up litter in your neighborhood",
+            "Compliment a stranger",
+            "Donate books to a local library",
+            "Leave positive reviews for small businesses you love",
+            "Share your umbrella with someone when it's raining",
+            "Write a thank you note to your mail carrier",
+            "Plant a tree or donate to a tree-planting organization",
+            "Offer your seat to someone on public transport",
+            "Pay for someone's meal at a restaurant",
+            "Send flowers to someone who needs cheering up",
+            "Help a neighbor with their yard work"
+        ];
+
+        // Load saved acts from localStorage
+        function loadSavedActs() {
+            const savedActs = localStorage.getItem('kindnessActs');
+            if (savedActs) {
+                acts = JSON.parse(savedActs);
+            }
+        }
+
+        // Save acts to localStorage
+        function saveActs() {
+            localStorage.setItem('kindnessActs', JSON.stringify(acts));
+        }
+
+        // Generate a random act
+        function generateAct() {
+            loadSavedActs();
+            const act = acts[Math.floor(Math.random() * acts.length)];
+            document.getElementById('kindnessAct').textContent = act;
+            animateText();
+        }
+
+        // Submit new act
+        function submitAct() {
+            const newAct = document.getElementById('newAct').value.trim();
+            if (newAct) {
+                loadSavedActs();
+                acts.push(newAct);
+                saveActs();
+                document.getElementById('newAct').value = '';
+                showSuccessMessage();
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage() {
+            const message = document.getElementById('successMessage');
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000);
+        }
+
+        // Share functionality
+        function shareAct(platform) {
+            const act = document.getElementById('kindnessAct').textContent;
+            const text = encodeURIComponent(`Today's Random Act of Kindness: ${act} #RandomActsOfKindness`);
+            
+            if (platform === 'twitter') {
+                window.open(`https://twitter.com/intent/tweet?text=${text}`);
+            }
+        }
+
+        // Copy to clipboard
+        function copyAct() {
+            const act = document.getElementById('kindnessAct').textContent;
+            navigator.clipboard.writeText(act).then(() => {
+                alert('Act of kindness copied to clipboard!');
+            });
+        }
+
+        // Text animation
+        function animateText() {
+            const textElement = document.getElementById('kindnessAct');
+            textElement.style.opacity = '0';
+            setTimeout(() => {
+                textElement.style.transition = 'opacity 0.5s ease';
+                textElement.style.opacity = '1';
+            }, 100);
+        }
+
+        // Initialize
+        loadSavedActs();
+    </script>
+</body>
+</html>
