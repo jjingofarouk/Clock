@@ -261,5 +261,5 @@ actElement.textContent = currentAct.act;
         });
     
 function donate() {
-    window.open('https://www.buymeacoffee.com/yourusername', '_blank');
+    window.open('https://www.buymeacoffee.com/jjingofarouk', '_blank');
 }
