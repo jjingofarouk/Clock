@@ -1,3 +1,4 @@
+    <style>
         :root {
             --primary-color: #6c5ce7;
             --secondary-color: #a8a4ff;
@@ -287,3 +288,4 @@
                 margin-bottom: 1rem;
             }
         }
+    </style>
