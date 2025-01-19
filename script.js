@@ -263,3 +263,7 @@ actElement.textContent = currentAct.act;
 function donate() {
     window.open('https://www.buymeacoffee.com/jjingofarouk', '_blank');
 }
+
+document.getElementById('modeToggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});
