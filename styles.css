@@ -1,4 +1,4 @@
-    <style>
+
         :root {
             --primary-color: #6c5ce7;
             --secondary-color: #a8a4ff;
@@ -288,4 +288,38 @@
                 margin-bottom: 1rem;
             }
         }
-    </style>
+    .donation-section {
+    text-align: center;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.donation-section h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.donation-section p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.donate-button {
+    padding: 1rem 2rem;
+    background-color: var(--secondary-color);
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.donate-button:hover {
+    background-color: var(--primary-color);
+}
