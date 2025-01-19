@@ -9,6 +9,410 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="favicon.png">
+<style>
+    /* Main Layout & Variables */
+:root {
+    --primary-color: #FF6B6B;
+    --secondary-color: #4ECDC4;
+    --accent-color: #FFE66D;
+    --dark-color: #2C3E50;
+    --light-color: #F7F9FC;
+    --success-color: #2ECC71;
+    --warning-color: #F1C40F;
+    --danger-color: #E74C3C;
+    --text-primary: #2C3E50;
+    --text-secondary: #6C7A89;
+    --border-radius: 12px;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --transition-speed: 0.3s;
+}
+
+/* Modern Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--light-color);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Challenges Filters */
+.challenges-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-group, .sort-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    box-shadow: var(--card-shadow);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.sort-select {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+}
+
+/* Featured Challenge */
+.featured-challenge {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 3rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.featured-banner {
+    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 1rem;
+    right: -2rem;
+    transform: rotate(45deg);
+    z-index: 1;
+}
+
+.featured-content {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.featured-info {
+    flex: 1;
+}
+
+.featured-preview {
+    flex: 1;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.featured-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Challenge Cards Grid */
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.challenge-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: transform var(--transition-speed);
+}
+
+.challenge-card:hover {
+    transform: translateY(-5px);
+}
+
+.challenge-badge {
+    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.challenge-content {
+    padding: 1.5rem;
+}
+
+.challenge-progress {
+    margin: 1rem 0;
+}
+
+.progress-bar {
+    background: #eee;
+    border-radius: 1rem;
+    height: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: var(--success-color);
+    height: 100%;
+    transition: width var(--transition-speed);
+}
+
+/* Leaderboard */
+.challenge-leaderboard {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.leaderboard-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+/* Super Cool Footer */
+.main-footer {
+    background: linear-gradient(135deg, var(--dark-color) 0%, #1a2a3a 100%);
+    color: white;
+    padding: 4rem 0 0;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--primary-color),
+        var(--secondary-color),
+        var(--accent-color),
+        var(--primary-color)
+    );
+    background-size: 300% 100%;
+    animation: gradient-slide 8s linear infinite;
+}
+
+@keyframes gradient-slide {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-section h4 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--secondary-color);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+    color: #a4b5c6;
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.footer-section ul li a:hover {
+    color: var(--secondary-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all var(--transition-speed);
+}
+
+.social-links a:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.footer-bottom-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.app-downloads {
+    display: flex;
+    gap: 1rem;
+}
+
+.app-button {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-speed);
+}
+
+.app-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.language-selector select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .featured-content {
+        flex-direction: column;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .challenges-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-color: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #a4b5c6;
+    }
+    
+    .challenge-card,
+    .featured-challenge,
+    .challenge-leaderboard {
+        background: #2d2d2d;
+    }
+    
+    .filter-btn {
+        background: #2d2d2d;
+        color: var(--text-primary);
+    }
+}
+</style>
+    
 </head>
 <body>
     <!-- Same navigation as index.html -->
