@@ -1,4 +1,3 @@
-  <script>
         let acts = [];
         let currentAct = null;
         let completedActs = new Set();
@@ -259,4 +258,3 @@ actElement.textContent = currentAct.act;
                 markCompleted();
             }
         });
-    </script>
