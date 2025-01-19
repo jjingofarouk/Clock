@@ -259,7 +259,21 @@ actElement.textContent = currentAct.act;
             }
         });
         
-        
+   // Update progress bar
+function updateProgressBar(completed, goal) {
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const progress = (completed / goal) * 100;
+
+    progressBar.style.width = `${Math.min(progress, 100)}%`;
+
+    if (completed >= goal) {
+        progressText.textContent = "Daily goal achieved! You're amazing! 🎉";
+        progressBar.style.background = 'linear-gradient(90deg, #00b894, #00cec9)';
+    } else {
+        progressText.textContent = `${completed} of ${goal} acts completed today`;
+    }
+}     
         
         
 function donate() {
