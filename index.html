@@ -1,14 +1,52 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate random acts of kindness and make the world a better place, one act at a time.">
     <title>Random Acts of Kindness Generator</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
- 
+    <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-heart"></i>
+                    <span>RAK Generator</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="challenges.html">Challenges</a>
+                <a href="community.html">Community</a>
+                <a href="resources.html">Resources</a>
+                <a href="impact.html">Your Impact</a>
+            </div>
+            <div class="nav-auth">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="login-button" id="loginBtn">Sign In</button>
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <img src="" alt="" id="userAvatar">
+                    <span id="userName"></span>
+                    <div class="user-dropdown">
+                        <ul>
+                            <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="header">
             <h1>Random Acts of Kindness Generator</h1>
@@ -28,10 +66,27 @@
                 <div class="stat-value" id="currentStreak">0</div>
                 <div class="stat-label">Day Streak</div>
             </div>
+            <div class="stat-item">
+                <div class="stat-value" id="impactScore">0</div>
+                <div class="stat-label">Impact Score</div>
+            </div>
         </div>
 
         <div class="filters" id="categoryFilters">
-            <!-- Dynamically populated -->
+            <button class="filter-btn active" data-category="all">All Categories</button>
+            <button class="filter-btn" data-category="family">Family</button>
+            <button class="filter-btn" data-category="friends">Friends</button>
+            <button class="filter-btn" data-category="community">Community</button>
+            <button class="filter-btn" data-category="environment">Environment</button>
+            <button class="filter-btn" data-category="workplace">Workplace</button>
+            <button class="filter-btn" data-category="strangers">Strangers</button>
+        </div>
+
+        <div class="difficulty-filters">
+            <button class="difficulty-btn active" data-difficulty="all">All Difficulties</button>
+            <button class="difficulty-btn" data-difficulty="easy">Easy</button>
+            <button class="difficulty-btn" data-difficulty="medium">Medium</button>
+            <button class="difficulty-btn" data-difficulty="challenging">Challenging</button>
         </div>
 
         <div class="kindness-card">
@@ -39,39 +94,280 @@
                 <i class="fas fa-spinner fa-spin"></i> Loading...
             </div>
             <div id="error" style="display: none;" class="error-message">
+                <i class="fas fa-exclamation-circle"></i>
                 Unable to load acts of kindness. Please try again later.
+                <button class="retry-button" onclick="retryGeneration()">
+                    <i class="fas fa-redo"></i> Retry
+                </button>
             </div>
             <p class="act-text" id="kindnessAct">Click the button below to get your random act of kindness for today!</p>
             <div class="act-details">
                 <span class="detail-tag" id="category"></span>
                 <span class="detail-tag" id="difficulty"></span>
+                <span class="detail-tag" id="timeEstimate"></span>
+                <span class="detail-tag" id="impactLevel"></span>
+            </div>
+            <div class="act-tips" id="actTips" style="display: none;">
+                <h4><i class="fas fa-lightbulb"></i> Tips for Success</h4>
+                <ul id="tipsList"></ul>
             </div>
             <button class="button" onclick="generateAct()" id="generateButton">
                 <span><i class="fas fa-heart"></i> Generate Act of Kindness</span>
             </button>
             <div class="social-share">
-                <button class="share-button" onclick="markCompleted()">
+                <button class="share-button" onclick="markCompleted()" id="completeButton">
                     <i class="fas fa-check"></i> Mark Complete
                 </button>
-                <button class="share-button" onclick="shareAct('twitter')">
-                    <i class="fab fa-twitter"></i> Share
+                <button class="share-button" onclick="shareAct('twitter')" id="twitterShare">
+                    <i class="fab fa-twitter"></i> Share on Twitter
                 </button>
-                <button class="share-button" onclick="copyAct()">
-                    <i class="fas fa-copy"></i> Copy
+                <button class="share-button" onclick="shareAct('facebook')" id="facebookShare">
+                    <i class="fab fa-facebook"></i> Share on Facebook
+                </button>
+                <button class="share-button" onclick="copyAct()" id="copyButton">
+                    <i class="fas fa-copy"></i> Copy to Clipboard
                 </button>
             </div>
         </div>
 
         <div class="completion-tracker">
             <h3>Daily Progress</h3>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressBar"></div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-markers">
+                    <span class="marker" data-goal="1">1</span>
+                    <span class="marker" data-goal="3">3</span>
+                    <span class="marker" data-goal="5">5</span>
+                    <span class="marker" data-goal="7">7</span>
+                    <span class="marker" data-goal="10">10</span>
+                </div>
             </div>
             <p id="progressText">Complete more acts to reach your daily goal!</p>
+            <div class="daily-rewards">
+                <h4>Daily Rewards</h4>
+                <div class="rewards-grid">
+                    <div class="reward-item" data-acts="1">
+                        <i class="fas fa-star"></i>
+                        <span>1 Act</span>
+                        <div class="reward-tooltip">Earn 10 points</div>
+                    </div>
+                    <div class="reward-item" data-acts="3">
+                        <i class="fas fa-star"></i>
+                        <span>3 Acts</span>
+                        <div class="reward-tooltip">Earn 50 points</div>
+                    </div>
+                    <div class="reward-item" data-acts="5">
+                        <i class="fas fa-star"></i>
+                        <span>5 Acts</span>
+                        <div class="reward-tooltip">Earn 100 points + Badge</div>
+                    </div>
+                    <div class="reward-item" data-acts="7">
+                        <i class="fas fa-star"></i>
+                        <span>7 Acts</span>
+                        <div class="reward-tooltip">Earn 200 points + Special Achievement</div>
+                    </div>
+                    <div class="reward-item" data-acts="10">
+                        <i class="fas fa-crown"></i>
+                        <span>10 Acts</span>
+                        <div class="reward-tooltip">Earn 500 points + Unique Title</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-stats">
+            <div class="stats-heading">
+                <h3>Your Recent Activity</h3>
+                <a href="impact.html" class="view-all">View Full Stats <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>This Week</h4>
+                        <p><span id="weeklyActs">0</span> acts completed</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>Trending</h4>
+                        <p><span id="trendingCategory">-</span></p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>Next Achievement</h4>
+                        <p><span id="nextAchievement">-</span></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
- 
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="close-modal" id="closeAuthModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="social-auth">
+                    <button class="social-auth-btn google">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+                    <button class="social-auth-btn facebook">
+                        <i class="fab fa-facebook"></i>
+                        Continue with Facebook
+                    </button>
+                    <button class="social-auth-btn apple">
+                        <i class="fab fa-apple"></i>
+                        Continue with Apple
+                    </button>
+                </div>
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+                <form id="authForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" required>
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="button">Sign In</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About RAK Generator</h4>
+                <p>Spreading kindness, one act at a time. Our mission is to make the world a better place through small, meaningful actions.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="guides.html">Kindness Guides</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="press.html">Press Kit</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="cookies.html">Cookie Policy</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+<!-- Continuing index.html from where we left off -->
+                <p>Get weekly inspiration and kindness ideas straight to your inbox!</p>
+                <form class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="button">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+                    <label class="consent-checkbox">
+                        <input type="checkbox" required>
+                        <span>I agree to receive email updates and accept the <a href="privacy.html">privacy policy</a></span>
+                    </label>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2024 RAK Generator. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-button">
+                        <i class="fab fa-apple"></i> App Store
+                    </a>
+                    <a href="#" class="app-button">
+                        <i class="fab fa-google-play"></i> Google Play
+                    </a>
+                </div>
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="zh">中文</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button class="button" id="acceptCookies">Accept</button>
+                <button class="button button-outline" id="cookieSettings">Cookie Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/kindness.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/analytics.js"></script>
 </body>
 </html>
