@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Take on exciting kindness challenges and make an even bigger impact in your community.">
+    <title>Kindness Challenges - RAK Generator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+    <!-- Same navigation as index.html -->
+    <nav class="main-nav">
+        <!-- Navigation content (same as index.html) -->
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Kindness Challenges</h1>
+            <p>Push yourself further with structured challenges and earn special rewards!</p>
+        </div>
+
+        <div class="challenges-wrapper">
+            <div class="challenges-filters">
+                <div class="filter-group">
+                    <label>Filter by:</label>
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+                <div class="sort-group">
+                    <label>Sort by:</label>
+                    <select class="sort-select">
+                        <option value="newest">Newest First</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="difficulty">Difficulty</option>
+                        <option value="timeLeft">Time Remaining</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="featured-challenge">
+                <div class="featured-banner">
+                    <i class="fas fa-star"></i> Featured Challenge
+                </div>
+                <div class="featured-content">
+                    <div class="featured-info">
+                        <h2>30 Days of Gratitude</h2>
+                        <p>Transform your perspective and spread joy through daily gratitude practices.</p>
+                        <div class="challenge-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>1,234 participants</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Starts in 3 days</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-award"></i>
+                                <span>Special Badge Reward</span>
+                            </div>
+                        </div>
+                        <button class="button">
+                            <i class="fas fa-plus"></i> Join Challenge
+                        </button>
+                    </div>
+                    <div class="featured-preview">
+                        <img src="images/gratitude-challenge.jpg" alt="30 Days of Gratitude Challenge Preview">
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenges-grid">
+                <!-- Active Challenges -->
+                <div class="challenge-card">
+                    <div class="challenge-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Weekly Challenge</span>
+                    </div>
+                    <div class="challenge-content">
+                        <h3>Spread Joy Week</h3>
+                        <p>Complete 7 different acts of kindness in 7 days</p>
+                        <div class="challenge-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%"></div>
+                            </div>
+                            <span>3/7 completed</span>
+                        </div>
+                        <div class="challenge-meta">
+                            <span><i class="fas fa-clock"></i> 4 days left</span>
+                            <span><i class="fas fa-users"></i> 456 participants</span>
+                        </div>
+                        <div class="challenge-rewards">
+                            <span class="reward-tag"><i class="fas fa-gem"></i> 500 points</span>
+                            <span class="reward-tag"><i class="fas fa-medal"></i> Special Badge</span>
+                        </div>
+                        <button class="button">Continue Challenge</button>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-badge">
+                        <i class="fas fa-fire"></i>
+                        <span>Community Challenge</span>
+                    </div>
+                    <div class="challenge-content">
+                        <h3>Environmental Impact</h3>
+                        <p>Make a positive impact on the environment through daily eco-friendly actions</p>
+                        <div class="challenge-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <span>6/10 completed</span>
+                        </div>
+                        <div class="challenge-meta">
+                            <span><i class="fas fa-clock"></i> 5 days left</span>
+                            <span><i class="fas fa-users"></i> 789 participants</span>
+                        </div>
+                        <div class="challenge-rewards">
+                            <span class="reward-tag"><i class="fas fa-gem"></i> 750 points</span>
+                            <span class="reward-tag"><i class="fas fa-tree"></i> Earth Guardian Badge</span>
+                        </div>
+                        <button class="button">Continue Challenge</button>
+                    </div>
+                </div>
+
+                <!-- Upcoming Challenges -->
+                <div class="challenge-card upcoming">
+                    <div class="challenge-badge">
+                        <i class="fas fa-calendar"></i>
+                        <span>Upcoming</span>
+                    </div>
+                    <div class="challenge-content">
+                        <h3>Random Acts of Coffee</h3>
+                        <p>Brighten strangers' days by buying them coffee and spreading caffeine kindness</p>
+                        <div class="challenge-countdown">
+                            <i class="fas fa-hourglass-start"></i>
+                            <span>Starts in 2 days</span>
+                        </div>
+                        <div class="challenge-meta">
+                            <span><i class="fas fa-calendar-alt"></i> Duration: 5 days</span>
+                            <span><i class="fas fa-users"></i> 234 interested</span>
+                        </div>
+                        <div class="challenge-rewards">
+                            <span class="reward-tag"><i class="fas fa-gem"></i> 300 points</span>
+                            <span class="reward-tag"><i class="fas fa-coffee"></i> Barista Badge</span>
+                        </div>
+                        <button class="button button-outline">
+                            <i class="fas fa-bell"></i> Set Reminder
+                        </button>
+                    </div>
+                </div>
+
+                <!-- More challenge cards... -->
+            </div>
+
+            <div class="challenges-pagination">
+                <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <span class="pagination-ellipsis">...</span>
+                <button class="pagination-btn">12</button>
+                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Challenge Leaderboard -->
+        <div class="challenge-leaderboard">
+            <h2>Top Challenge Participants</h2>
+            <div class="leaderboard-tabs">
+                <button class="tab-btn active">Weekly</button>
+                <button class="tab-btn">Monthly</button>
+                <button class="tab-btn">All Time</button>
+            </div>
+            <div class="leaderboard-content">
+                <div class="leaderboard-item">
+                    <div class="rank">1</div>
+                    <div class="user-info">
+                        <img src="images/user1.jpg" alt="User Avatar" class="user-avatar">
+                        <div class="user-details">
+                            <span class="username">KindnessWarrior</span>
+                            <span class="user-level">Level 42</span>
+                        </div>
+                    </div>
+                    <div class="score">
+                        <i class="fas fa-star"></i>
+                        <span>2,450 points</span>
+                    </div>
+                </div>
+                <!-- More leaderboard items... -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Same footer as index.html -->
+    <footer class="main-footer">
+        <!-- Footer content (same as index.html) -->
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/challenges.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+</html>
