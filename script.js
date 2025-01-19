@@ -258,3 +258,10 @@ actElement.textContent = currentAct.act;
                 markCompleted();
             }
         });
+        
+        
+        
+        
+function donate() {
+    window.open('https://www.buymeacoffee.com/jjingofarouk', '_blank');
+}
