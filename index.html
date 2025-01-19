@@ -3,71 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121212">
     <title>Random Acts of Kindness</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <!-- PWA Support -->
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <h1>Random Acts of Kindness</h1>
+            </div>
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <button class="auth-button" id="loginButton">Sign In</button>
+                    <!-- User Profile (shows after login) -->
+                    <div class="user-profile" id="userProfile" style="display: none;">
+                        <img src="" alt="" id="userAvatar" class="avatar">
+                        <span id="username"></span>
+                        <div class="level-badge" id="userLevel">Level 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
     <div class="container">
-        <div class="header">
-            <h1>Random Acts of Kindness Generator</h1>
-            <p>Make someone's day better with a simple act of kindness!</p>
-            <button class="mode-toggle" id="modeToggle">Toggle Dark Mode</button>
-        </div>
-
-        <div class="stats-bar">
-         
-            <div class="stat-item">
-                <div class="stat-value" id="completedActs">0</div>
-                <div class="stat-label">Completed</div>
+        <!-- User Stats Dashboard -->
+        <div class="stats-dashboard">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="completedActs">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="currentStreak">0</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalPoints">0</div>
+                    <div class="stat-label">Points</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="currentRank">Beginner</div>
+                    <div class="stat-label">Rank</div>
+                </div>
             </div>
-            <div class="stat-item">
-                <div class="stat-value" id="currentStreak">0</div>
-                <div class="stat-label">Day Streak</div>
-            </div>
-        </div>
-
-        <div class="kindness-card">
-            <div id="loading" style="display: none;">
-                <i class="fas fa-spinner fa-spin"></i> Loading...
-            </div>
-            <div id="error" style="display: none;" class="error-message">
-                Unable to load acts of kindness. Please try again later.
-            </div>
-            <p class="act-text" id="kindnessAct">Click the button below to get your random act of kindness for today!</p>
-            <div class="act-details">
-                <span class="detail-tag" id="category"></span>
-                <span class="detail-tag" id="difficulty"></span>
-            </div>
-            <button class="button" onclick="generateAct()" id="generateButton">
-                <span><i class="fas fa-heart"></i> Generate Act of Kindness</span>
-            </button>
-            <div class="social-share">
-                <button class="share-button" onclick="markCompleted()">
-                    <i class="fas fa-check"></i> Mark Complete
-                </button>
-                <button class="share-button" onclick="shareAct('twitter')">
-                    <i class="fab fa-twitter"></i> Share
-                </button>
-                <button class="share-button" onclick="copyAct()">
-                    <i class="fas fa-copy"></i> Copy
-                </button>
+            
+            <!-- Progress to Next Level -->
+            <div class="level-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="levelProgress"></div>
+                </div>
+                <p>Level <span id="currentLevel">1</span> • <span id="pointsToNext">100</span> points to next level</p>
             </div>
         </div>
 
-        <div class="completion-tracker">
-            <h3>Daily Progress</h3>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressBar"></div>
+        <!-- Main Content -->
+        <div class="content-grid">
+            <!-- Left Column -->
+            <div class="main-content">
+                <!-- Kindness Card -->
+                <div class="kindness-card">
+                    <div id="loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Loading...
+                    </div>
+                    <div id="error" style="display: none;" class="error-message">
+                        Unable to load acts of kindness. Please try again later.
+                    </div>
+                    <p class="act-text" id="kindnessAct">Click the button below to get your random act of kindness for today!</p>
+                    <div class="act-details">
+                        <span class="detail-tag" id="category"></span>
+                        <span class="detail-tag" id="difficulty"></span>
+                        <span class="detail-tag" id="timeRequired"></span>
+                    </div>
+                    <button class="button" onclick="generateAct()" id="generateButton">
+                        <span><i class="fas fa-heart"></i> Generate Act of Kindness</span>
+                    </button>
+                    <div class="social-share">
+                        <button class="share-button" onclick="markCompleted()">
+                            <i class="fas fa-check"></i> Mark Complete
+                        </button>
+                        <button class="share-button" onclick="shareAct('twitter')">
+                            <i class="fab fa-twitter"></i> Share
+                        </button>
+                        <button class="share-button" onclick="copyAct()">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Community Feed -->
+                <div class="community-feed">
+                    <h2>Community Feed</h2>
+                    <div class="feed-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Following</button>
+                        <button class="filter-btn">Trending</button>
+                    </div>
+                    <div id="feedContent" class="feed-content">
+                        <!-- Feed items will be dynamically inserted here -->
+                    </div>
+                </div>
             </div>
-            <p id="progressText">Complete more acts to reach your daily goal!</p>
+
+            <!-- Right Column -->
+            <div class="sidebar">
+                <!-- Statistics Charts -->
+                <div class="stats-card">
+                    <h3>Your Impact</h3>
+                    <canvas id="activityChart"></canvas>
+                    <canvas id="impactChart"></canvas>
+                </div>
+
+                <!-- Achievements -->
+                <div class="achievements-card">
+                    <h3>Recent Achievements</h3>
+                    <div id="achievementsList">
+                        <!-- Achievements will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="notifications-card">
+                    <h3>Notifications</h3>
+                    <div id="notificationsList">
+                        <!-- Notifications will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="donation-section">
-    <h2>Support Random Acts of Kindness</h2>
-    <p>Your contribution helps us keep this initiative alive and spread kindness to more people around the world.</p>
-    <button class="button donate-button" onclick="donate()">Donate Now</button>
-</div>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <h2>Sign In</h2>
+            <button class="social-auth-btn" onclick="signInWithGoogle()">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+            <button class="social-auth-btn" onclick="signInWithFacebook()">
+                <i class="fab fa-facebook"></i> Continue with Facebook
+            </button>
+            <div class="auth-divider">or</div>
+            <form id="authForm">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="button">Sign In</button>
+            </form>
+            <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuthMode()">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.0/chart.min.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => console.log('ServiceWorker registered'))
+                .catch(err => console.log('ServiceWorker registration failed:', err));
+        }
+    </script>
 </body>
 </html>
