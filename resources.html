@@ -1,0 +1,162 @@
+<!-- resources.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - RAK Generator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-heart"></i>
+                    <span>RAK Generator</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="challenges.html">Challenges</a>
+                <a href="community.html">Community</a>
+                <a href="resources.html">Resources</a>
+                <a href="impact.html">Your Impact</a>
+            </div>
+            <div class="nav-auth">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="login-button" id="loginBtn">Sign In</button>
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <img src="" alt="" id="userAvatar">
+                    <span id="userName"></span>
+                    <div class="user-dropdown">
+                        <ul>
+                            <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>    <div class="container">
+        <div class="header">
+            <h1>Kindness Resources</h1>
+            <p>Tools and guides to help you make a bigger impact</p>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Kindness Guides</h3>
+                <p>Step-by-step guides for various acts of kindness</p>
+                <a href="#" class="button">View Guides</a>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Printable Materials</h3>
+                <p>Posters, cards, and tracking sheets</p>
+                <a href="#" class="button">Download</a>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Video Tutorials</h3>
+                <p>Learn from others' experiences</p>
+                <a href="#" class="button">Watch Now</a>
+            </div>
+        </div>
+    </div>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About RAK Generator</h4>
+                <p>Spreading kindness, one act at a time. Our mission is to make the world a better place through small, meaningful actions.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="guides.html">Kindness Guides</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="press.html">Press Kit</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="cookies.html">Cookie Policy</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+<!-- Continuing index.html from where we left off -->
+                <p>Get weekly inspiration and kindness ideas straight to your inbox!</p>
+                <form class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="button">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+                    <label class="consent-checkbox">
+                        <input type="checkbox" required>
+                        <span>I agree to receive email updates and accept the <a href="privacy.html">privacy policy</a></span>
+                    </label>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2024 RAK Generator. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-button">
+                        <i class="fab fa-apple"></i> App Store
+                    </a>
+                    <a href="#" class="app-button">
+                        <i class="fab fa-google-play"></i> Google Play
+                    </a>
+                </div>
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="zh">中文</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer></body>
+</html>
